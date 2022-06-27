@@ -1,0 +1,24 @@
+.bgcol{
+    background-color: white;
+}
+
+.custom-button {
+    height: 45px;
+    background-color: #9a1550;
+    border: none;
+    color: #fff
+}
+
+.custom-button:hover,
+.custom-button:focus {
+    background-color: #9a1550;
+    box-shadow: none;
+    outline: none
+}
+
+.loginBtn{
+    margin-right: 10px;
+    height: auto;
+    width: auto;
+}
+

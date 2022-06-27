@@ -1,0 +1,16 @@
+<nav class="navbar navbar-light bg-white">
+    <a class="navbar-brand" href="#">
+        <h5>Flight Reservation System</h5>
+    </a>
+
+    <ul class="navbar-nav">
+        <button type="button" class="btn custom-button loginBtn" *ngIf="!user" (click)="adminLogin()">
+            Login
+        </button>
+
+        <button type="button" class="btn custom-button loginBtn" *ngIf="user" (click)="logout()">
+            Logout
+        </button>
+    </ul>
+
+</nav>

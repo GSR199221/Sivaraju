@@ -1,0 +1,375 @@
+<div class="container mt-5">
+  <h5 class="text-center text-white mb-4">
+    Book Domestic and International Flight Tickets
+  </h5>
+
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-10">
+      <div class="bg-white">
+
+        <!-- tabs -->
+        <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" #one id="faq_tab_1-tab" data-bs-toggle="tab" data-bs-target="#faq_tab_1"
+              type="button" (click)="clickone()" role="tab" aria-controls="faq_tab_1" aria-selected="true">
+              <div class="d-flex flex-column lh-lg">
+                <i class="bx bxs-plane-alt"></i>
+                <span style="font-size: larger">Book Flight</span>
+              </div>
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link " #two id="faq_tab_2-tab" data-bs-toggle="tab" data-bs-target="#faq_tab_2"
+              type="button" (click)="clicktwo()" role="tab" aria-controls="faq_tab_2" aria-selected="false">
+              <div class="d-flex flex-column lh-lg">
+                <i class="bx bxs-shopping-bag"></i>
+                <span style="font-size: larger">Manage Bookings</span>
+              </div>
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" #three id="faq_tab_3-tab" data-bs-toggle="tab" data-bs-target="#faq_tab_3"
+              type="button" role="tab" (click)="clickthree()" aria-controls="faq_tab_3" aria-selected="false">
+              <div class="d-flex flex-column lh-lg">
+                <i class="bx bx-check-circle"></i>
+                <span style="font-size: larger">Booking History</span>
+              </div>
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+          <!-- tab-1 -->
+          <div class="tab-pane fade active show" id="faq_tab_1" role="tabpanel" aria-labelledby="faq_tab_1-tab">
+            <div class="container p-3 scroll-y">
+              <div class="input-group mb-3" *ngIf="!isSelectedFlight">
+                <form [formGroup]="form" *ngIf="!flightList.length">
+                  <div class="radioBtn">
+                    <div class="form-check form-check-inline mb-3">
+                      <input class="form-check-input" type="radio" name="tripType" id="inlineRadio1"
+                        formControlName="tripType" value="oneway" />
+                      <label class="form-check-label" for="inlineRadio1">One Trip</label>
+                    </div>
+                    <div class="form-check form-check-inline mb-3">
+                      <input class="form-check-input" type="radio" name="tripType" id="inlineRadio2"
+                        formControlName="tripType" value="round" />
+                      <label class="form-check-label" for="inlineRadio2">Round Trip</label>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <div class="col-2"></div>
+                    <div class="col-4">
+                      <label class="form-check-label" for="roundTrip">From</label>
+                      <select formControlName="from" class="form-select form-control" id="inputGroupSelect02">
+                        <option selected>From</option>
+                        <option [value]=from *ngFor="let from of fromList">{{from}}</option>
+                      </select>
+                    </div>
+                    <div class="col-4">
+                      <label class="form-check-label" for="roundTrip">To</label>
+                      <select formControlName="to" class="form-select form-control" id="inputGroupSelect02">
+                        <option selected>To</option>
+                        <option [value]=val *ngFor="let val of toList">{{val}}</option>
+                      </select>
+                    </div>
+                    <div class="col-2"></div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <div class="col-2"></div>
+                    <div class="col-4">
+                      <div class="input-group">
+                        <label class="form-label" for="date">Date</label>
+                        <input formControlName="date" type="date" class="form-control dateSize" />
+                      </div>
+                    </div>
+                    <div class="col-4" *ngIf="form.value.tripType!=='oneway'">
+                      <div class="input-group">
+                        <label class="form-label" for="date">Return Date {{form.value.tripType}}</label>
+                        <input formControlName="returnDate" type="date" class="form-control dateSize" />
+                      </div>
+                    </div>
+                    <div class="col-2"></div>
+                  </div>
+
+                  <div class="d-flex justify-content-center">
+                    <button class="btn btn-success custom-button px-5 mt-3" (click)="search()">
+                      Show Flights
+                    </button>
+                  </div>
+                </form>
+
+                <div *ngIf="flightList.length" class="container p-3 scroll-y">
+                  <div class="p-3 d-flex justify-content-between align-items-center">
+                    <div class="row">
+                      <!-- <div class="col-8 offset-2"> -->
+                      <ol class="list-group-item" [class.active]="isActive==i"
+                        *ngFor="let row of flightList;let i=index">
+                        <div class="row">
+                          <div class="col-2">{{row.flightName}}</div>
+                          <div class="col-2">{{row.flightCode}}</div>
+                          <div class="col-2">{{row.bookedDate}}</div>
+                          <div class="col-2">{{row.from}}</div>
+                          <div class="col-2">{{row.to}}</div>
+                          <div class="col-2">
+                            <button type="submit" (click)="onSelectFlight(i,row)"
+                              class="btn custom-button">Book</button>
+                          </div>
+                        </div>
+                      </ol>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="isSelectedFlight" class="input-group mb-3">
+
+                <div class="row" style="margin-left: 10px;margin-right: 10px;">
+                  <table class="table table-striped">
+                    <tr>
+                      <th>Flight Name</th>
+                      <!-- <th>Logo</th> -->
+                      <th>Source</th>
+                      <th>Destination</th>
+                      <th>Price</th>
+                      <th>Booked Date</th>
+                    </tr>
+                    <tr>
+                      <td>{{selectedFlight.flightName}}</td>
+                      <!-- <td> <img style="width: 120px" src={{selectedFlight.logo}} alt="logo"></td> -->
+                      <td>{{selectedFlight.from}}</td>
+                      <td>{{selectedFlight.to}}</td>
+                      <td>{{selectedFlight.price}}</td>
+                      <td>{{selectedFlight.bookedDate}}</td>
+                    </tr>
+                  </table>
+                </div>
+
+                <div class="mt-3">
+                  <form class="row" style="margin-left: 10px;" [formGroup]="userform">
+                    <div formArrayName="adults">
+                      <div *ngFor="let employee of employees().controls; let i=index">
+                        <div [formGroupName]="i">
+                          <div class="row">
+
+                            <div class="col-3">
+                              <label for="person" class="form-label">Passenger Name</label>
+                              <input style="height: 40px;" type="text" formControlName="personName"
+                                class="form-control">
+                            </div>
+                            <div class="col-2">
+                              <label for="gender" class="form-label">Gender</label>
+                              <select class="form-select" formControlName="gender" aria-label="Default select example">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                              </select>
+                            </div>
+
+                            <div class="col-2">
+                              <label for="age" class="form-label">Age</label>
+                              <input style="height: 40px;" type="text" formControlName="age" class="form-control">
+                            </div>
+
+                            <div class="col-2">
+                              <label for="mealType" class="form-label">Meal Type</label>
+                              <select class="form-select" formControlName="menuType"
+                                aria-label="Default select example">
+                                <option value="Veg">Veg</option>
+                                <option value="Non-Veg">Non-veg</option>
+                              </select>
+                            </div>
+
+                            <div class="col-3" style="margin-top: 30px;">
+                              <button class="btn btn-success custom-button" style="height: 40px;"
+                                (click)="addEmployee()">Add
+                                Passenger</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="d-flex justify-content-center" style="margin-top: 50px;">
+                        <button class="btn btn-success custom-button px-4" (click)="countinueBooking()">
+                          Book Now
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- tab-2 -->
+          <div class="tab-pane fade" id="faq_tab_2" role="tabpanel" aria-labelledby="faq_tab_2-tab">
+            <div class="container p-3 scroll-y">
+
+              <!-- <div class="container p-3 scroll-y" style="margin-top: 35px;"> -->
+              <div class="p-3 d-flex justify-content-between align-items-center">
+                <div class="row" style="width: 100%;" *ngIf="!isTest">
+                  <ol class="list-group-item" *ngFor="let flight of bookedFlghtsList">
+                    <div class="row">
+                      <div class="col-2">{{flight.flightName}}</div>
+                      <div class="col-2">{{flight.flightCode}}</div>
+                      <div class="col-2">{{flight.from}}</div>
+                      <div class="col-2">{{flight.to}}</div>
+                      <div class="col-2">{{flight.bookedDate}}</div>
+                      <div class="col-2">
+                        <div class="col-2">
+                          <span>
+                            <button type="button" style="margin: 5px;width: 85px;" (click)="viewBook(flight)"
+                              class="btn btn-outline-secondary btn-sm">View</button>
+                          </span>
+                        </div>
+
+                        <div class="col-2">
+                          <span *ngIf="flight.pending">
+                            <button type="button" style="margin: 5px;width: 85px;" class="btn btn-outline-danger btn-sm"
+                              (click)="cancelFlight(flight)">Cancel</button>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </ol>
+                </div>
+
+                <div class="row" *ngIf="isTest" style="width: 100%;">
+                  <ol class="list-group-item">
+                    <div class="row">
+                      <button class="btn custom-button" style="width: auto;margin-left: 575px;height: auto;"
+                        (click)="viewbtnClick()">
+                        <i class="fa-solid fa-angle-left"></i>
+                        Back</button>
+                    </div>
+
+                    <h6 class="mb-2" style="text-align: center;">Flight Details</h6>
+
+                    <div class="row" style="margin-left: 10px;margin-right: 10px;">
+                      <table class="table table-striped">
+                        <tr>
+                          <th>Flight Name</th>
+                          <!-- <th>Logo</th> -->
+                          <th>Source</th>
+                          <th>Destination</th>
+                          <th>Booked Date</th>
+                        </tr>
+                        <tr>
+                          <td>{{bookedList.flightName}}</td>
+                          <!-- <td> <img style="width: 120px" src={{bookedList.logo}} alt="logo"></td> -->
+                          <td>{{bookedList.from}}</td>
+                          <td>{{bookedList.to}}</td>
+                          <td>{{bookedList.bookedDate}}</td>
+                        </tr>
+                      </table>
+                    </div>
+
+                    <div class="row">
+                      <h6 class="mb-2" style="text-align: center;">Passenger Details</h6>
+
+                      <div class="row mb-2">
+                        <div class="col-3">Passenger Name</div>
+                        <div class="col-3">Gender</div>
+                        <div class="col-3">Age</div>
+                        <div class="col-3">Meal Type</div>
+                      </div>
+                      <ol class="list-group-item" *ngFor="let vote of bookedList.adults">
+                        <div class="row">
+                          <div class="col-3">{{vote.personName}}</div>
+                          <div class="col-3">{{vote.gender}}</div>
+                          <div class="col-3">{{vote.age}}</div>
+                          <div class="col-3">{{vote.mealType}}</div>
+                        </div>
+                      </ol>
+
+                    </div>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- tab-3 -->
+          <div class="tab-pane fade" id="faq_tab_3" role="tabpanel" aria-labelledby="faq_tab_3-tab">
+            <div class="container p-3 mt-2 scroll-y">
+              <div class="p-3 d-flex justify-content-between align-items-center">
+                <div class="row" style="width: 100%;" *ngIf="!isHistoty">
+                  <ol class="list-group-item" *ngFor="let book of bookedFlightHistoryList">
+                    <div class="row">
+                      <div class="col-2">{{book.flightName}}</div>
+                      <div class="col-2">{{book.flightCode}}</div>
+                      <div class="col-2">{{book.from}}</div>
+                      <div class="col-2">{{book.to}}</div>
+                      <div class="col-2">{{book.bookedDate}}</div>
+                      <div class="col-2">
+                        <span>
+                          <button type="button" style="margin: 5px;width: 85px;" (click)="viewStatus(book)"
+                            class="btn btn-outline-secondary btn-sm">View Status</button>
+                        </span>
+                      </div>
+                    </div>
+                  </ol>
+                </div>
+
+                <div class="row" *ngIf="isHistoty" style="width: 100%;">
+                  <ol class="list-group-item">
+                    <div class="row">
+                      <button class="btn custom-button" style="width: auto;margin-left: 575px;height: auto;"
+                        (click)="viewbtnClickthree()">
+                        <i class="fa-solid fa-angle-left"></i>
+                        Back</button>
+                    </div>
+
+                    <h6 class="mb-2" style="text-align: center;">Flight Details</h6>
+
+                    <div class="row" style="margin-left: 10px;margin-right: 10px;">
+                      <table class="table table-striped">
+                        <tr>
+                          <th>Flight Name</th>
+                          <!-- <th>Logo</th> -->
+                          <th>Source</th>
+                          <th>Destination</th>
+                          <th>Booked Date</th>
+                        </tr>
+                        <tr>
+                          <td>{{bookedFlightStatus.flightName}}</td>
+                          <!-- <td> <img style="width: 120px" src={{bookedFlightStatus.logo}} alt="logo"></td> -->
+                          <td>{{bookedFlightStatus.from}}</td>
+                          <td>{{bookedFlightStatus.to}}</td>
+                          <td>{{bookedFlightStatus.bookedDate}}</td>
+                        </tr>
+                      </table>
+                    </div>
+
+                    <div class="row">
+                      <h6 class="mb-2" style="text-align: center;">Passenger Details</h6>
+
+                      <div class="row mb-2">
+                        <div class="col-3">Passenger Name</div>
+                        <div class="col-3">Gender</div>
+                        <div class="col-3">Age</div>
+                        <div class="col-3">Meal Type</div>
+                      </div>
+                      <ol class="list-group-item" *ngFor="let vote of bookedFlightStatus.adults">
+                        <div class="row">
+                          <div class="col-3">{{vote.personName}}</div>
+                          <div class="col-3">{{vote.gender}}</div>
+                          <div class="col-3">{{vote.age}}</div>
+                          <div class="col-3">{{vote.mealType}}</div>
+                        </div>
+                      </ol>
+
+                    </div>
+                  </ol>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

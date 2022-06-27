@@ -1,0 +1,195 @@
+{
+  "flights": [
+    {
+      "flightName": "Air India",
+      "flightCode": "FLY-01",
+      "from": "Hyderabad",
+      "to": "Chennai",
+      "depDate": "27 Jun 2022",
+      "arrDate": "27 Jun 2022",
+      "depTime": "1:05 AM",
+      "arrTime": "2:05 AM",
+      "price": "9000",
+      "status": true,
+      "id": 13
+    },
+    {
+      "flightName": "Air India",
+      "flightCode": "FLY-02",
+      "from": "Hyderabad",
+      "to": "Chennai",
+      "depDate": "27 Jun 2022",
+      "arrDate": "27 Jun 2022",
+      "depTime": "1:05 AM",
+      "arrTime": "1:05 AM",
+      "price": "9000",
+      "status": true,
+      "id": 14
+    }
+  ],
+  "createUser": [
+    {
+      "username": "siva@gmail.com",
+      "pass": "siva@gmail.com",
+      "conformpass": "siva@gmail.com",
+      "id": 7
+    },
+    {
+      "username": "sivaraju",
+      "pass": "123456",
+      "conformpass": "sivaraju",
+      "id": 8
+    }
+  ],
+  "bookedFlights": [
+    {
+      "flightName": "Air India",
+      "flightCode": "FLY-031",
+      "from": "Hyderabad",
+      "to": "Chennai",
+      "airportName": "Indira Gandhi International Airport",
+      "depDate": "25 Jun 2019",
+      "arrDate": "25 Jun 2019",
+      "depTime": "1:05 AM",
+      "arrTime": "2:05 AM",
+      "price": "5000",
+      "logo": "assets/images/Air-India-logo.png",
+      "block": false,
+      "bookedDate": "2022-06-26",
+      "tripType": "oneway",
+      "returnDate": null,
+      "adults": [
+        {
+          "personName": "raju",
+          "gender": "Male",
+          "age": "23",
+          "menuType": "Non-Veg"
+        },
+        {
+          "personName": "siva",
+          "gender": "Female",
+          "age": "34",
+          "menuType": "Non-Veg"
+        }
+      ],
+      "pending": true,
+      "id": 1
+    }
+  ],
+  "bookedFlightsHistory": [
+    {
+      "flightName": "Air India",
+      "flightCode": "FLY-031",
+      "from": "Hyderabad",
+      "to": "Chennai",
+      "airportName": "Indira Gandhi International Airport",
+      "depDate": "25 Jun 2019",
+      "arrDate": "25 Jun 2019",
+      "depTime": "1:05 AM",
+      "arrTime": "2:05 AM",
+      "price": "5000",
+      "logo": "assets/images/Air-India-logo.png",
+      "block": false,
+      "bookedDate": "2022-06-26",
+      "tripType": "oneway",
+      "returnDate": null,
+      "adults": [
+        {
+          "personName": "raju",
+          "gender": "Male",
+          "age": "23",
+          "menuType": "Non-Veg"
+        },
+        {
+          "personName": "siva",
+          "gender": "Female",
+          "age": "34",
+          "menuType": "Non-Veg"
+        }
+      ],
+      "pending": true,
+      "id": 1
+    },
+    {
+      "flightName": "SpiceJet",
+      "flightCode": "FLY-032",
+      "from": "Hyderabad",
+      "to": "Chennai",
+      "airportName": "Indira Gandhi International Airport",
+      "depDate": "25 Jun 2019",
+      "arrDate": "25 Jun 2019",
+      "depTime": "2:05 AM",
+      "arrTime": "3:05 AM",
+      "price": "7000",
+      "logo": "assets/images/SpiceJet-logo.png",
+      "block": false,
+      "bookedDate": "2022-06-26",
+      "tripType": "oneway",
+      "returnDate": null,
+      "adults": [
+        {
+          "personName": "raj",
+          "gender": "Male",
+          "age": "11",
+          "menuType": "Veg"
+        }
+      ],
+      "pending": true,
+      "id": 2
+    },
+    {
+      "flightName": "Air India",
+      "flightCode": "FLY-031",
+      "from": "Hyderabad",
+      "to": "Chennai",
+      "airportName": "Indira Gandhi International Airport",
+      "depDate": "25 Jun 2019",
+      "arrDate": "25 Jun 2019",
+      "depTime": "1:05 AM",
+      "arrTime": "2:05 AM",
+      "price": "5000",
+      "logo": "assets/images/Air-India-logo.png",
+      "block": false,
+      "bookedDate": "2022-06-27",
+      "tripType": "oneway",
+      "returnDate": null,
+      "adults": [
+        {
+          "personName": "ssssss",
+          "gender": "Male",
+          "age": "44",
+          "menuType": "Veg"
+        }
+      ],
+      "pending": true,
+      "id": 3
+    },
+    {
+      "flightName": "Air India",
+      "flightCode": "FLY-031",
+      "from": "Hyderabad",
+      "to": "Chennai",
+      "airportName": "Indira Gandhi International Airport",
+      "depDate": "25 Jun 2019",
+      "arrDate": "25 Jun 2019",
+      "depTime": "1:05 AM",
+      "arrTime": "2:05 AM",
+      "price": "5000",
+      "logo": "assets/images/Air-India-logo.png",
+      "block": false,
+      "bookedDate": "2022-06-27",
+      "tripType": "oneway",
+      "returnDate": null,
+      "adults": [
+        {
+          "personName": "surendra",
+          "gender": "Male",
+          "age": "25",
+          "menuType": "Veg"
+        }
+      ],
+      "pending": true,
+      "id": 4
+    }
+  ]
+}

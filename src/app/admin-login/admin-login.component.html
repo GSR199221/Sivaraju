@@ -1,0 +1,322 @@
+<div class="container mt-5">
+    <h5 class="text-center text-white mb-4">
+        Admin Login
+    </h5>
+
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10">
+            <div class="bg-white">
+
+                <div *ngIf="!isAdminLogin">
+                    <div class="container p-3 scroll-y">
+                        <div class="input-group mb-3">
+                            <form [formGroup]="form">
+                                <div class="row mb-3">
+                                    <div class="col-6 offset-3">
+                                        <label class="form-check-label" for="roundTrip">Username</label>
+                                        <input formControlName="username" type="text" class="form-control" />
+                                    </div>
+                                    <div class="col-6 offset-3 mt-3">
+                                        <label class="form-check-label" for="roundTrip">Password</label>
+                                        <input formControlName="pass" type="password" class="form-control" />
+                                    </div>
+                                    <div *ngIf="isSignUp" class="col-6 offset-3 mt-3">
+                                        <label class="form-check-label" for="roundTrip">Conform Password</label>
+                                        <input formControlName="conformpass" type="password" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-center">
+                                    <button class="btn btn-success custom-button px-5 mt-3" (click)="Login()">
+                                        Login
+                                    </button>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button *ngIf="isSignUp" class="btn btn-success custom-button px-5 mt-3"
+                                        (click)="register()">
+                                        Register
+                                    </button>
+                                    <button *ngIf="!isSignUp" class="btn btn-success custom-button px-5 mt-3"
+                                        (click)="signup()">
+                                        Sign-Up
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="isAdminLogin">
+                    <!-- tabs -->
+                    <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" #one id="faq_tab_1-tab" data-bs-toggle="tab"
+                                data-bs-target="#faq_tab_1" type="button" (click)="clickone()" role="tab"
+                                aria-controls="faq_tab_1" aria-selected="true">
+                                <div class="d-flex flex-column lh-lg">
+                                    <i class="bx bxs-plane-alt"></i>
+                                    <span style="font-size: larger">Flight Details</span>
+                                </div>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link " #two id="faq_tab_2-tab" data-bs-toggle="tab"
+                                data-bs-target="#faq_tab_2" type="button" (click)="clicktwo()" role="tab"
+                                aria-controls="faq_tab_2" aria-selected="false">
+                                <div class="d-flex flex-column lh-lg">
+                                    <i class="bx bxs-shopping-bag"></i>
+                                    <span style="font-size: larger">Manage Flights</span>
+                                </div>
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="myTabContent">
+                        <!-- tab-1 -->
+                        <div class="tab-pane fade active show" id="faq_tab_1" role="tabpanel"
+                            aria-labelledby="faq_tab_1-tab">
+                            <div class="container p-3 scroll-y">
+                                <div class="container p-3 scroll-y">
+                                    <div class="p-3 justify-content-between align-items-center" style="width: 100%;">
+
+                                        <div class="row">
+                                            <button type="submit" style="width: auto;" (click)="createNewFlight()"
+                                                *ngIf="!isCreateNewFlight" class="btn custom-button mb-3">Create New
+                                                Flight</button>
+
+                                            <ng-container [formGroup]="createFlightForm" *ngIf="isCreateNewFlight">
+                                                <div class="row mb-2">
+                                                    <div class="col-6 offset-3 mb-2">
+                                                        <label class="form-check-label" for="roundTrip">Flight
+                                                            Name</label>
+                                                        <input formControlName="flightName" type="text"
+                                                            class="form-control" />
+                                                    </div>
+
+                                                    <div class="col-6 offset-3 mb-2">
+                                                        <label class="form-check-label" for="roundTrip">Flight
+                                                            Code</label>
+                                                        <input formControlName="flightCode" type="text"
+                                                            class="form-control" />
+                                                    </div>
+
+                                                    <div class="col-6 offset-3 mb-2">
+                                                        <label class="form-check-label" for="roundTrip">From</label>
+                                                        <select formControlName="from" class="form-select form-control"
+                                                            id="inputGroupSelect02">
+                                                            <option selected>From</option>
+                                                            <option [value]=from *ngFor="let from of fromList">{{from}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-6 offset-3 mb-2">
+                                                        <label class="form-check-label" for="roundTrip">To</label>
+                                                        <select formControlName="to" class="form-select form-control"
+                                                            id="inputGroupSelect02">
+                                                            <option selected>To</option>
+                                                            <option [value]=val *ngFor="let val of toList">{{val}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-6 offset-3 mb-2">
+                                                        <label class="form-check-label" for="roundTrip">Departure
+                                                            Date</label>
+                                                        <input formControlName="depDate" type="text"
+                                                            class="form-control" />
+                                                    </div>
+                                                    <div class="col-6 offset-3 mb-2">
+                                                        <label class="form-check-label" for="roundTrip">Arrival
+                                                            Date</label>
+                                                        <input formControlName="arrDate" type="text"
+                                                            class="form-control" />
+                                                    </div>
+                                                    <div class="col-6 offset-3 mb-2">
+                                                        <label class="form-check-label" for="roundTrip">Departure
+                                                            Time</label>
+                                                        <input formControlName="depTime" type="text"
+                                                            class="form-control" />
+                                                    </div>
+                                                    <div class="col-6 offset-3 mb-2">
+                                                        <label class="form-check-label" for="roundTrip">Arrival
+                                                            Time</label>
+                                                        <input formControlName="arrTime" type="text"
+                                                            class="form-control" />
+                                                    </div>
+
+                                                    <div class="col-6 offset-3 mb-2">
+                                                        <label class="form-check-label" for="roundTrip">Price</label>
+                                                        <input formControlName="price" type="text"
+                                                            class="form-control" />
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="d-flex justify-content-center">
+                                                    <button class="btn btn-success custom-button px-5 mt-3"
+                                                        (click)="addFlight()">
+                                                        Add Flight
+                                                    </button>
+                                                </div>
+                                            </ng-container>
+
+                                            <ng-container *ngIf="!isCreateNewFlight">
+
+                                                <div class="row" style="width: 100%;">
+                                                    <div class="row mb-1">
+                                                        <div class="col-2">FlightName</div>
+                                                        <div class="col-2">FlightCode</div>
+                                                        <div class="col-2">Source</div>
+                                                        <div class="col-2">Destination</div>
+                                                        <div class="col-2">Dep Time</div>
+                                                        <div class="col-2">Price</div>
+                                                    </div>
+                                                    <ol class="list-group-item"
+                                                        *ngFor="let flight of flightList;let i=index">
+                                                        <div class="row">
+                                                            <div class="col-2">{{flight.flightName}}</div>
+                                                            <div class="col-2">{{flight.flightCode}}</div>
+                                                            <div class="col-2">{{flight.from}}</div>
+                                                            <div class="col-2">{{flight.to}}</div>
+                                                            <div class="col-2">{{flight.depTime}}</div>
+                                                            <div class="col-2">{{flight.price}}</div>
+                                                        </div>
+                                                    </ol>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- tab-2 -->
+                        <div class="tab-pane fade" id="faq_tab_2" role="tabpanel" aria-labelledby="faq_tab_2-tab">
+                            <div class="container p-3 scroll-y">
+
+                                <!-- <div class="container p-3 scroll-y" style="margin-top: 35px;"> -->
+                                <div class="p-3 d-flex justify-content-between align-items-center" *ngIf='!isUpdate'>
+                                    <div class="row" style="width: 100%;">
+                                        <ol class="list-group-item" *ngFor="let flight of flightList;let i=index">
+                                            <div class="row">
+                                                <div class="col-2">{{flight.flightName}}</div>
+                                                <div class="col-2">{{flight.flightCode}}</div>
+                                                <div class="col-2">{{flight.from}}</div>
+                                                <div class="col-2">{{flight.to}}</div>
+                                                <!-- <div class="col-2">{{flight.depTime}}</div> -->
+                                                <div class="col-2">{{flight.price}}</div>
+                                                <div class="col-2">
+
+                                                    <div class="col-2">
+                                                        <span>
+                                                            <button type="button" style="margin: 5px;width: 85px;"
+                                                                (click)="editFlight(flight.id)"
+                                                                class="btn btn-outline-secondary btn-sm">Update</button>
+                                                        </span>
+                                                    </div>
+
+                                                    <div class="col-2">
+                                                        <span>
+                                                            <button type="button" style="margin: 5px;width: 85px;"
+                                                                (click)="deleteFlightByAd(flight.id)"
+                                                                class="btn btn-outline-secondary btn-sm">Delete</button>
+                                                        </span>
+                                                    </div>
+
+                                                    <div class="col-2">
+                                                        <span>
+                                                            <button type="button" style="margin: 5px;width: 85px;"
+                                                                class="btn btn-outline-danger btn-sm"
+                                                                (click)="blockUnblockFlight(flight.id,flight.status)">{{flight.status?'Block':'Unblock'}}</button>
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </ol>
+                                    </div>
+
+
+                                </div>
+
+
+                                <ng-container [formGroup]="updateFlightForm" *ngIf="isUpdate">
+                                    <div class="row mb-2">
+                                        <div class="col-6 offset-3 mb-2">
+                                            <label class="form-check-label" for="roundTrip">Flight
+                                                Name</label>
+                                            <input formControlName="flightName" type="text" class="form-control" />
+                                        </div>
+
+                                        <div class="col-6 offset-3 mb-2">
+                                            <label class="form-check-label" for="roundTrip">Flight
+                                                Code</label>
+                                            <input formControlName="flightCode" type="text" class="form-control" />
+                                        </div>
+
+                                        <div class="col-6 offset-3 mb-2">
+                                            <label class="form-check-label" for="roundTrip">From</label>
+                                            <select formControlName="from" class="form-select form-control"
+                                                id="inputGroupSelect02">
+                                                <option selected>From</option>
+                                                <option [value]=from *ngFor="let from of fromList">{{from}}
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-6 offset-3 mb-2">
+                                            <label class="form-check-label" for="roundTrip">To</label>
+                                            <select formControlName="to" class="form-select form-control"
+                                                id="inputGroupSelect02">
+                                                <option selected>To</option>
+                                                <option [value]=val *ngFor="let val of toList">{{val}}
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-6 offset-3 mb-2">
+                                            <label class="form-check-label" for="roundTrip">Departure
+                                                Date</label>
+                                            <input formControlName="depDate" type="text" class="form-control" />
+                                        </div>
+                                        <div class="col-6 offset-3 mb-2">
+                                            <label class="form-check-label" for="roundTrip">Arrival
+                                                Date</label>
+                                            <input formControlName="arrDate" type="text" class="form-control" />
+                                        </div>
+                                        <div class="col-6 offset-3 mb-2">
+                                            <label class="form-check-label" for="roundTrip">Departure
+                                                Time</label>
+                                            <input formControlName="depTime" type="text" class="form-control" />
+                                        </div>
+                                        <div class="col-6 offset-3 mb-2">
+                                            <label class="form-check-label" for="roundTrip">Arrival
+                                                Time</label>
+                                            <input formControlName="arrTime" type="text" class="form-control" />
+                                        </div>
+
+                                        <div class="col-6 offset-3 mb-2">
+                                            <label class="form-check-label" for="roundTrip">Price</label>
+                                            <input formControlName="price" type="text" class="form-control" />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="d-flex justify-content-center">
+                                        <button class="btn btn-success custom-button px-5 mt-3"
+                                            (click)="updateFlightApi()">
+                                            Update Flight
+                                        </button>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
